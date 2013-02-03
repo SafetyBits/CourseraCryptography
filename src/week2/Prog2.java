@@ -43,8 +43,6 @@ public class Prog2 {
 		ct = new BigInteger(
 				"770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa0e311bde9d4e01726d3184c34451",
 				16);
-		// System.out.println(decryptCTRMode(skey.toByteArray(),
-		// ct.toByteArray()));
 		System.out
 				.println(decryptCTRMode2(skey.toByteArray(), ct.toByteArray()));
 	}
@@ -119,7 +117,7 @@ public class Prog2 {
 			ShortBufferException, IllegalBlockSizeException,
 			BadPaddingException {
 		byte[] ivBytes = Arrays.copyOf(cipherText, 16);
-
+		StringBuilder sb = new StringBuilder();
 		for (int i = 16; i < cipherText.length; i += 16) {
 			SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
 			Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding", "BC");
@@ -129,12 +127,12 @@ public class Prog2 {
 			ctLength += cipher.doFinal(cipherText, ctLength);
 			int length = Math.min(ct.length, cipherText.length - i);
 			for (int j = 0; j < length; j++) {
-				System.out.print((char) (ct[j] ^ cipherText[i + j]));
+				sb.append((char) (ct[j] ^ cipherText[i + j]));
 			}
 			BigInteger next = new BigInteger(ivBytes).add(BigInteger.ONE);
 			ivBytes = next.toByteArray();
 		}
-		return "";
+		return sb.toString();
 
 	}
 }
