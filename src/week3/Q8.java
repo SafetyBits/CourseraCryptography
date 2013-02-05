@@ -8,6 +8,40 @@ import java.security.NoSuchProviderException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 
+/**
+ * In this question and the next, you are asked to find collisions on two
+ * compression functions:
+ * <ol>
+ * <li>
+ * <code>f1(x,y)=AES(y,x) ⊕ y,</code> and</li>
+ * <li>
+ * <code>f2(x,y)=AES(x,x) ⊕ y,</li></code>
+ * </ol>
+ * where AES(x,y) is the AES-128 encryption of y under key x.
+ * <p>
+ * We provide an AES function for you to play with. The function takes as input
+ * a key k and an x value and outputs <code>AES(k,x)</code> once you press the
+ * "encrypt" button. It takes as input a key k and a y value and outputs
+ * <code>AES<sup>−1</sup>(k,y)</code> once you press the "decrypt" button. All
+ * three values <code>k,x,y</code> are assumed to be hex values (i.e. using only
+ * characters 0-9 and a-f) and the function zero-pads them as needed.
+ * 
+ * Your goal is to find four distinct pairs
+ * <code>(x1,y1), (x2,y2), (x3,y3), (x4,y4)</code> such that
+ * <code>f1(x1,y1)=f1(x2,y2)</code> and <code>f2(x3,y3)=f2(x4,y4)</code>. In
+ * other words, the first two pairs are a collision for f1 and the last two
+ * pairs are a collision for f2. Once you find all four pairs, please enter them
+ * below and check your answer using the "check" button.
+ * <p>
+ * <b>Collision for first function is:</b>
+ * <p>
+ * <code>
+ * x2 := AES<sup>-1</sup>(y2,f1(x1,y) ⊕ y2)
+ * </code> for any <code>x1, y1, y2</code>
+ * 
+ * @author rustam
+ * 
+ */
 public class Q8 {
 	public static void main(String[] args) throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException,

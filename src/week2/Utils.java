@@ -1,7 +1,7 @@
 package week2;
 
 /**
- * General utilities for the second chapter examples.
+ * General utilities for the second week examples.
  */
 public class Utils {
 	private static String digits = "0123456789abcdef";

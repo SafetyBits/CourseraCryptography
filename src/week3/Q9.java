@@ -2,6 +2,20 @@ package week3;
 
 import java.math.BigInteger;
 
+/**
+ * See {@link Q8} for question details.
+ * <p>
+ * <b>Collision for second function is:</b>
+ * <p>
+ * <code>
+ * y2 := f2(x1,y1) ⊕ AES(x2,x2)
+ * </code> for any <code>x1, y1, x2</code>
+ * 
+ * @see Q8
+ * 
+ * @author rustam
+ * 
+ */
 public class Q9 {
 	public static void main(String[] args) {
 		BigInteger y3 = new BigInteger("00000000000000000000000000000002", 16);
