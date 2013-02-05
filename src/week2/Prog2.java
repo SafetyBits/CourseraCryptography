@@ -117,20 +117,19 @@ public class Prog2 {
 			ShortBufferException, IllegalBlockSizeException,
 			BadPaddingException {
 		byte[] ivBytes = Arrays.copyOf(cipherText, 16);
+		SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
+		Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding", "BC");
+		cipher.init(Cipher.ENCRYPT_MODE, key);
 		StringBuilder sb = new StringBuilder();
 		for (int i = 16; i < cipherText.length; i += 16) {
-			SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
-			Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding", "BC");
 			byte[] ct = new byte[ivBytes.length];
-			cipher.init(Cipher.ENCRYPT_MODE, key);
 			int ctLength = cipher.update(ivBytes, 0, ivBytes.length, ct, 0);
 			ctLength += cipher.doFinal(cipherText, ctLength);
 			int length = Math.min(ct.length, cipherText.length - i);
 			for (int j = 0; j < length; j++) {
 				sb.append((char) (ct[j] ^ cipherText[i + j]));
 			}
-			BigInteger next = new BigInteger(ivBytes).add(BigInteger.ONE);
-			ivBytes = next.toByteArray();
+			ivBytes = new BigInteger(ivBytes).add(BigInteger.ONE).toByteArray();
 		}
 		return sb.toString();
 
