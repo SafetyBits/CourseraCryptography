@@ -9,6 +9,13 @@ package week2;
  * mode with a random IV. The encrypted packet payload is 128 bytes. Which of
  * the following messages is plausibly the decryption of the payload:
  * 
+ * <p>
+ * <b>Solution</b>
+ * <p>
+ * Message length should be less than ciphertext length in length of IV (16
+ * bytes for AES) plus some bytes between 0 and 16 for PKCS5 padding. So
+ * resulting length should be between 96 and 112.
+ * 
  * @author rustam
  * 
  */
@@ -22,7 +29,7 @@ public class Q8 {
 	public static void main(String[] args) {
 		for (int i = 0; i < msg.length; i++) {
 			int msgLen = msg[i].toCharArray().length;
-			if (msgLen <= 112 && msgLen > 96) {
+			if (msgLen <= 112 && msgLen >= 96) {
 				System.out.println("The message is: " + msg[i]);
 				break;
 			}

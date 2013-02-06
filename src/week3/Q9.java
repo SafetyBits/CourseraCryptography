@@ -8,8 +8,8 @@ import java.math.BigInteger;
  * <b>Collision for second function is:</b>
  * <p>
  * <code>
- * y2 := f2(x1,y1) ⊕ AES(x2,x2)
- * </code> for any <code>x1, y1, x2</code>
+ * y<sub>2</sub> := f<sub>2</sub>(x<sub>1</sub>,y<sub>1</sub>) ⊕ AES(x<sub>2</sub>,x<sub>2</sub>)
+ * </code> for any <code>x<sub>1</sub>, y<sub>1</sub>, x<sub>2</sub></code>
  * 
  * @see Q8
  * 

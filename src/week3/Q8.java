@@ -13,31 +13,36 @@ import javax.crypto.ShortBufferException;
  * compression functions:
  * <ol>
  * <li>
- * <code>f1(x,y)=AES(y,x) ⊕ y,</code> and</li>
+ * <code>f<sub>1</sub>(x,y)=AES(y,x) ⊕ y,</code> and</li>
  * <li>
- * <code>f2(x,y)=AES(x,x) ⊕ y,</li></code>
+ * <code>f<sub>2</sub>(x,y)=AES(x,x) ⊕ y,</li></code>
  * </ol>
  * where AES(x,y) is the AES-128 encryption of y under key x.
  * <p>
- * We provide an AES function for you to play with. The function takes as input
- * a key k and an x value and outputs <code>AES(k,x)</code> once you press the
- * "encrypt" button. It takes as input a key k and a y value and outputs
- * <code>AES<sup>−1</sup>(k,y)</code> once you press the "decrypt" button. All
- * three values <code>k,x,y</code> are assumed to be hex values (i.e. using only
- * characters 0-9 and a-f) and the function zero-pads them as needed.
+ * We provide an <code>AES</code> function for you to play with. The function
+ * takes as input a key k and an x value and outputs <code>AES(k,x)</code> once
+ * you press the "encrypt" button. It takes as input a key k and a y value and
+ * outputs <code>AES<sup>−1</sup>(k,y)</code> once you press the "decrypt"
+ * button. All three values <code>k,x,y</code> are assumed to be hex values
+ * (i.e. using only characters 0-9 and a-f) and the function zero-pads them as
+ * needed.
  * 
  * Your goal is to find four distinct pairs
- * <code>(x1,y1), (x2,y2), (x3,y3), (x4,y4)</code> such that
- * <code>f1(x1,y1)=f1(x2,y2)</code> and <code>f2(x3,y3)=f2(x4,y4)</code>. In
- * other words, the first two pairs are a collision for f1 and the last two
- * pairs are a collision for f2. Once you find all four pairs, please enter them
- * below and check your answer using the "check" button.
+ * <code>(x<sub>1</sub>,y<sub>1</sub>), (x<sub>2</sub>,y<sub>2</sub>), (x<sub>3</sub>,y<sub>3</sub>), (x<sub>4</sub>,y<sub>4</sub>)</code>
+ * such that
+ * <code>f<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>)=f<sub>1</sub>(x<sub>2</sub>,y<sub>2</sub>)</code>
+ * and
+ * <code>f<sub>2</sub>(x<sub>3</sub>,y<sub>3</sub>)=f<sub>2</sub>(x<sub>4</sub>,y<sub>4</sub>)</code>
+ * . In other words, the first two pairs are a collision for f<sub>1</sub> and
+ * the last two pairs are a collision for f<sub>2</sub>. Once you find all four
+ * pairs, please enter them below and check your answer using the "check"
+ * button.
  * <p>
  * <b>Collision for first function is:</b>
  * <p>
  * <code>
- * x2 := AES<sup>-1</sup>(y2,f1(x1,y) ⊕ y2)
- * </code> for any <code>x1, y1, y2</code>
+ * x<sub>2</sub> := AES<sup>-1</sup>(y<sub>2</sub>,f<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) ⊕ y<sub>2</sub>)
+ * </code> for any <code>x<sub>1</sub>, y<sub>1</sub>, y<sub>2</sub></code>
  * 
  * @author rustam
  * 

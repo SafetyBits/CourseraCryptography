@@ -37,41 +37,52 @@ import javax.crypto.spec.SecretKeySpec;
  * Question 1
  * <p>
  * <code>
- * CBC key: 140b41b22a29beb4061bda66b6747e14
+ * CBC key:
+ * <p> 
+ * <nobr>140b41b22a29beb4061bda66b6747e14</nobr>
  * <p> 
  * CBC Ciphertext 1:
- * 4ca00ff4c898d61e1edbf1800618fb2828a226d160dad07883d04e008a7897ee\
- * 2e4b7465d5290d0c0e6c6822236e1daafb94ffe0c5da05d9476be028ad7c1d81
+ * <p> 
+ * <nobr>4ca00ff4c898d61e1edbf1800618fb2828a226d160dad07883d04e008a7897ee\</nobr>
+ * <br><nobr>2e4b7465d5290d0c0e6c6822236e1daafb94ffe0c5da05d9476be028ad7c1d81</nobr>
  * </code>
  * <p>
  * Question 2
  * <p>
  * <code>
- * CBC key: 140b41b22a29beb4061bda66b6747e14 
+ * CBC key:
+ * <p> 
+ * <nobr>140b41b22a29beb4061bda66b6747e14</nobr>
  * <p>
  * CBC Ciphertext 2:
- * 5b68629feb8606f9a6667670b75b38a5b4832d0f26e1ab7da33249de7d4afc48\
- * e713ac646ace36e872ad5fb8a512428a6e21364b0c374df45503473c5242a253
+ * <p> 
+ * <nobr>5b68629feb8606f9a6667670b75b38a5b4832d0f26e1ab7da33249de7d4afc48\</nobr>
+ * <br><nobr>e713ac646ace36e872ad5fb8a512428a6e21364b0c374df45503473c5242a253</nobr>
  * </code>
  * <p>
  * Question 3
  * <p>
  * <code> 
- * CTR key: 36f18357be4dbd77f050515c73fcf9f2 
+ * CTR key:
+ * <p> 
+ * <nobr>36f18357be4dbd77f050515c73fcf9f2</nobr>
  * <p>
  * CTR Ciphertext 1:
- * 69dda8455c7dd4254bf353b773304eec0ec7702330098ce7f7520d1cbbb20fc3\ 88d1
- * b0adb5054dbd7370849dbf0b88d393f252e764f1f5f7ad97ef79d59ce29f5f51eeca32eabedd9afa9329
+ * <p> 
+ * <nobr>69dda8455c7dd4254bf353b773304eec0ec7702330098ce7f7520d1cbbb20fc3\</nobr>
+ * <br><nobr>88d1b0adb5054dbd7370849dbf0b88d393f252e764f1f5f7ad97ef79d59ce29f5f51eeca32eabedd9afa9329</nobr>
  * </code>
  * <p>
  * Question 4
  * <p>
  * <code>
- * CTR key: 36f18357be4dbd77f050515c73fcf9f2 
+ * CTR key:
+ * <p> 
+ * <nobr>36f18357be4dbd77f050515c73fcf9f2</nobr>
  * <p>
  * CTR Ciphertext 2:
- * 770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa\
- * 0e311bde9d4e01726d3184c34451
+ * <p> <nobr>770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa\</nobr>
+ * <br> <nobr>0e311bde9d4e01726d3184c34451</nobr>
  * </code>
  * 
  * @author rustam

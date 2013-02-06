@@ -68,11 +68,19 @@ import week2.Utils;
  * <p>
  * Your task is to write code to compute the hash h0 of a given file F and to
  * verify blocks of F as they are received by the client. In the box below
- * please enter the (hex encoded) hash h0 for this video file.
+ * please enter the (hex encoded) hash h0 for <a href=
+ * "https://class.coursera.org/crypto-005/lecture/download.mp4?lecture_id=27"
+ * >this video file</a>.
  * <p>
  * You can check your code by using it to hash a different file. In particular,
- * the hex encoded h0 for this video file is:
+ * the hex encoded h0 for <a href=
+ * "https://class.coursera.org/crypto-005/lecture/download.mp4?lecture_id=28"
+ * >this video file</a> is:
  * <code>03c08f4ee0b576fe319338139c045c89c3e8e9409633bea29442e21425006ea8</code>
+ * <p>
+ * <b>Solution</b>
+ * <p>
+ * Just use standard JCA/JCE API.
  * 
  * @author rustam
  * 
