@@ -57,7 +57,8 @@ import week2.Utils;
  * 
  * <p>
  * <b>Solution:</b> <br>
- * 
+ * Implementation of padding oracle attack
+ * <p>
  * <b>The Magic Words are Squeamish Ossifrage<b>
  * 
  * @author rustam
