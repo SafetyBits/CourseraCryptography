@@ -10,7 +10,7 @@ public class ExtendedEuclid {
 				+ ") = " + vals[0]);
 	}
 
-	private static int[] gcd(int p, int q) {
+	public static int[] gcd(int p, int q) {
 		if (q == 0)
 			return new int[] { p, 1, 0 };
 

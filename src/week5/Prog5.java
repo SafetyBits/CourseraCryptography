@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -100,9 +101,13 @@ public class Prog5 {
 			"13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084171");
 	private static final BigInteger g = new BigInteger(
 			"11717829880366207009516117596335367088558084999998952205599979459063929499736583746670572176471460312928594829675428279466566527115212748467589894601965568");
+	private static final BigInteger gInverse = g.modInverse(p);
 	private static final BigInteger h = new BigInteger(
 			"3239475104050450443565264378728065788649097520952449527834792452971981976143292558073856937958553180532878928001494706097394108577585732452307673444020333");
 	private static final int B = (int) Math.pow(2, 20);
+	private static final BigInteger BBig = new BigInteger(Long.toString(B));
+	private static final CountDownLatch done = new CountDownLatch(1);
+	private volatile static Map.Entry<BigInteger, BigInteger> result;
 	private static ExecutorService executor;
 
 	/**
@@ -126,20 +131,19 @@ public class Prog5 {
 		public Map<BigInteger, BigInteger> call() throws Exception {
 			for (int i = from; !Thread.interrupted() && i < to; i++) {
 				BigInteger exp = new BigInteger(Integer.toString(i));
-				BigInteger gx1 = g.modInverse(p).modPow(exp, p);
+				BigInteger gx1 = gInverse.modPow(exp, p);
 				left.put(h.multiply(gx1).mod(p), exp);
 			}
 			return left;
 		}
 	};
 
-	public static class SearchInHashTable implements
-			Callable<Map.Entry<BigInteger, BigInteger>> {
+	public static class SearchInHashMap implements Runnable {
 		private final int from;
 		private final int to;
 		private final Map<BigInteger, BigInteger>[] xx;
 
-		public SearchInHashTable(int from, int to,
+		public SearchInHashMap(int from, int to,
 				Map<BigInteger, BigInteger>[] xx) {
 			this.from = from;
 			this.to = to;
@@ -147,17 +151,21 @@ public class Prog5 {
 		}
 
 		@Override
-		public Map.Entry<BigInteger, BigInteger> call() throws Exception {
-			for (int i = from; !Thread.interrupted() && i < to; i++) {
-				BigInteger exp = new BigInteger(Long.toString(i))
-						.multiply(new BigInteger(Long.toString(B)));
+		public void run() {
+			for (int i = from; !Thread.interrupted() && done.getCount() > 0
+					&& i < to; i++) {
+				BigInteger exp = new BigInteger(Integer.toString(i))
+						.multiply(BBig);
 				BigInteger gbx1 = g.modPow(exp, p);
-				for (int k = 0; k < xx.length; k++)
-					if (xx[k].containsKey(gbx1))
-						return new AbstractMap.SimpleEntry<BigInteger, BigInteger>(
-								exp, xx[k].get(gbx1));
+				for (int k = 0; k < xx.length; k++) {
+					BigInteger val = xx[k].get(gbx1);
+					if (val != null) {
+						result = new AbstractMap.SimpleEntry<BigInteger, BigInteger>(
+								exp, val);
+						done.countDown();
+					}
+				}
 			}
-			return null;
 		}
 	}
 
@@ -191,28 +199,18 @@ public class Prog5 {
 					+ " second. Now: " + curr);
 		}
 
-		Queue<Future<Map.Entry<BigInteger, BigInteger>>> res = new LinkedList<Future<Map.Entry<BigInteger, BigInteger>>>();
 		Date start2 = new Date();
 		System.out.println("Start meet in the middle at: " + start2);
 		// split task for searching in hash table to number cpu and submit each
 		// part in separate thread
 		for (int i = 0; i < threadCnt; i++) {
-			SearchInHashTable calc = new SearchInHashTable(tmp * i, tmp
+			SearchInHashMap search = new SearchInHashMap(tmp * i, tmp
 					* (i + 1), xx);
-			res.add(executor.submit(calc));
+			executor.submit(search);
 		}
-		Map.Entry<BigInteger, BigInteger> r = null;
-		while (!res.isEmpty()) {
-			r = res.poll().get();
-			Date curr = new Date();
-			System.out.println((curr.getTime() - start2.getTime()) / 1000
-					+ " second. Now: " + curr);
-			if (r != null) {
-				executor.shutdownNow();
-				break;
-			}
-		}
-		BigInteger x = r.getKey().add(r.getValue());
+		done.await();
+		executor.shutdownNow();
+		BigInteger x = result.getKey().add(result.getValue());
 		Date stop = new Date();
 		System.out.println("Dlog: " + x);
 		System.out.println("Total " + (stop.getTime() - start.getTime()) / 1000
