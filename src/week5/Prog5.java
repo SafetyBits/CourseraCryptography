@@ -116,13 +116,13 @@ public class Prog5 {
 	 * @author rustam
 	 * 
 	 */
-	public static class BuildHashTable implements
+	public static class BuildHashMap implements
 			Callable<Map<BigInteger, BigInteger>> {
 		private final int from;
 		private final int to;
 		private final Map<BigInteger, BigInteger> left = new HashMap<BigInteger, BigInteger>();
 
-		public BuildHashTable(int from, int to) {
+		public BuildHashMap(int from, int to) {
 			this.from = from;
 			this.to = to;
 		}
@@ -176,7 +176,7 @@ public class Prog5 {
 	 */
 	public static void main(String[] args) throws InterruptedException,
 			ExecutionException {
-		// cpu count
+		// cpu cores count
 		int threadCnt = Runtime.getRuntime().availableProcessors();
 		threadCnt = threadCnt - threadCnt % 2;
 		int tmp = B / threadCnt;
@@ -184,10 +184,10 @@ public class Prog5 {
 		Queue<Future<Map<BigInteger, BigInteger>>> futures = new LinkedList<Future<Map<BigInteger, BigInteger>>>();
 		Date start = new Date();
 		System.out.println("Start at: " + start);
-		// split task for building hash table to number cpu and submit each part
-		// in separate thread
+		// split task for building hash table of computed values to number of
+		// cpu cores and submit each task to separate thread
 		for (int i = 0; i < threadCnt; i++) {
-			BuildHashTable calc = new BuildHashTable(tmp * i, tmp * (i + 1));
+			BuildHashMap calc = new BuildHashMap(tmp * i, tmp * (i + 1));
 			futures.add(executor.submit(calc));
 		}
 		@SuppressWarnings("unchecked")
@@ -201,11 +201,11 @@ public class Prog5 {
 
 		Date start2 = new Date();
 		System.out.println("Start meet in the middle at: " + start2);
-		// split task for searching in hash table to number cpu and submit each
-		// part in separate thread
+		// split task for searching in hash table to number of cpu cores and
+		// submit each task to separate thread
 		for (int i = 0; i < threadCnt; i++) {
-			SearchInHashMap search = new SearchInHashMap(tmp * i, tmp
-					* (i + 1), xx);
+			SearchInHashMap search = new SearchInHashMap(tmp * i,
+					tmp * (i + 1), xx);
 			executor.submit(search);
 		}
 		done.await();

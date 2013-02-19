@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Date;
 
 import week2.Utils;
 
@@ -73,6 +74,8 @@ public class Prog4 {
 	private static final byte[][] ctBlocks = new byte[ct.length / 16][];
 
 	public static void main(String[] args) throws IOException {
+		Date start = new Date();
+		System.out.println("Start at: " + start);
 		for (int i = 0; i < ctBlocks.length; i++) {
 			ctBlocks[i] = Arrays.copyOfRange(ct, i * BLOCK_SIZE, (i + 1)
 					* BLOCK_SIZE);
@@ -119,6 +122,9 @@ public class Prog4 {
 		fos.write(pt);
 		fos.flush();
 		fos.close();
+		Date end = new Date();
+		System.out.println("Finished at: " + end + ". Total time spent: "
+				+ (end.getTime() - start.getTime()) / 1000 + " sec.");
 	}
 
 	/**
