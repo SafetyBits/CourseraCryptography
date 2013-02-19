@@ -120,11 +120,12 @@ public class Prog5 {
 			Callable<Map<BigInteger, BigInteger>> {
 		private final int from;
 		private final int to;
-		private final Map<BigInteger, BigInteger> left = new HashMap<BigInteger, BigInteger>();
+		private final Map<BigInteger, BigInteger> left;
 
 		public BuildHashMap(int from, int to) {
 			this.from = from;
 			this.to = to;
+			left = new HashMap<BigInteger, BigInteger>(to - from, 1);
 		}
 
 		@Override
