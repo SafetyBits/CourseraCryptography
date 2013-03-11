@@ -97,7 +97,7 @@ import java.util.concurrent.Future;
  * 
  */
 public class Prog5 {
-	private static final int B = (int) Math.pow(2, 20);
+	private static final int B = 1 << 20;
 	private static final BigInteger BBig = new BigInteger(Integer.toString(B));
 	private static final BigInteger p = new BigInteger(
 			"13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084171");
