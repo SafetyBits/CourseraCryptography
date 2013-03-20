@@ -133,10 +133,10 @@ public class Prog6 {
 	private static BigInteger q;
 
 	public static void main(String[] args) {
-		System.out.println("challenge#1 p: " + challenge1());
-		System.out.println("challenge#2 p: " + challenge2());
-		System.out.println("challenge#3 p: " + challenge3());
-		System.out.println("challenge#3: " + challenge4());
+		System.out.println("challenge#1: p = " + challenge1());
+		System.out.println("challenge#2: p = " + challenge2());
+		System.out.println("challenge#3: p = " + challenge3());
+		System.out.println("challenge#4: " + challenge4());
 	}
 
 	public static BigInteger challenge1() {
@@ -171,14 +171,14 @@ public class Prog6 {
 	}
 
 	/**
-	 * Solution by Serge Le Breton from thread <a
+	 * Solution from thread <a
 	 * href="https://class.coursera.org/crypto-005/forum/thread?thread_id=453"
-	 * >Week 6 Programming Assignment Q3</a>
+	 * >Week 6 Programming Assignment Q3</a> by Serge Le Breton
 	 * <p>
 	 * <code>
 	 * A = 3p + 2q<br> 
 	 * A ~= sqrt(6N)<br> 
-	 * (1) 6p= A - x <br>
+	 * (1) 6p = A - x <br>
 	 * (2) 4q = A + x <br> 
 	 * (2) - (1) => 4q - 6p = 2x => x = 2q - 3p => Integer. <br> 
 	 * (2)*(1) => 24pq = A<sup>2</sup> -x<sup>2</sup> => 24N = A<sup>2</sup> -x<sup>2</sup> <br> 
@@ -198,15 +198,9 @@ public class Prog6 {
 		Apint x = ApfloatMath.sqrt(
 				A.multiply(A).subtract(N.multiply(new Apint(24)))).ceil();
 		Apint p = A.subtract(x).divide(six).ceil();
-		Apint q = N.divide(p).ceil();
-		Apint an = p.multiply(q);
-		Apint delta = an.subtract(N).ceil();
-		while (!delta.equals(Apint.ZERO)) {
-			p = p.subtract(Apint.ONE);
-			q = N.divide(p).ceil();
-			an = p.multiply(q);
-			delta = an.subtract(N).ceil();
-		}
+		// Apint q = N.divide(p).ceil();
+		// Apint an = p.multiply(q);
+		// Apint delta = an.subtract(N).ceil();
 		return p.toBigInteger();
 	}
 

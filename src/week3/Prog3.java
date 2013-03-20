@@ -86,7 +86,7 @@ import week2.Utils;
  * 
  */
 public class Prog3 {
-	private static final String filePath = "C:\\Users\\rustam\\Videos\\Coursera\\Cryptography I\\week3\\6 - 1 - Introduction (11 min).mp4";
+	private static final String filePath = "C:\\Users\\rustam\\Videos\\Coursera\\Cryptography I\\Week3.2 Collision Resistance\\6 - 1 - Introduction (11 min).mp4";
 	// 6 - 2 - Generic birthday attack (16 min).mp4
 	private static MessageDigest digest = null;
 
